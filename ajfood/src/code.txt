@@ -1,0 +1,16 @@
+const [loggedinUser, setLoggedinUser] = useState("");
+
+useEffect(() => {
+    setLoggedinUser(localStorage.getItem("loggedInUser"));
+  }, []);
+
+  const handleLogoutButton = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("loggedInUser");
+    showSuccessToast("Logout Successfully");
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+  };
+
+

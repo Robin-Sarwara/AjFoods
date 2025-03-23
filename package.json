@@ -1,0 +1,16 @@
+{
+  "name": "mern-project",
+  "version": "1.0.0",
+  "private": true,
+ "scripts": {
+  "install-all": "npm install --prefix backend && npm install --prefix ajfood",
+  "start-backend": "npm start --prefix backend",
+  "start-frontend": "npm start --prefix ajfood",
+  "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
+  "build-frontend": "npm run build --prefix ajfood",
+  "build": "npm run install-all && npm run build-frontend"
+},
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
