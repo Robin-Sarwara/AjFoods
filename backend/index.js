@@ -16,10 +16,15 @@ const answer = require('./routes/Answers')
 const userAskedQuestion = require('./routes/userAskedQuestions')
 const review = require('./routes/Review')
 const cart = require('./routes/cartRouter')
+const cors = require('cors');
+
+// Update CORS configuration
 const corsOptions = {
-    origin:"http://localhost:5173",
-    credentials: true,
-}
+  origin: ['http://localhost:5173', 'https://ajfoods-1.onrender.com'], // Allow both local and deployed frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+  credentials: true // Include credentials if needed
+};
+
 
 const PORT = process.env.PORT || 9090;
 
