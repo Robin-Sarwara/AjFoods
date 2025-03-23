@@ -16,7 +16,6 @@ const answer = require('./routes/Answers')
 const userAskedQuestion = require('./routes/userAskedQuestions')
 const review = require('./routes/Review')
 const cart = require('./routes/cartRouter')
-const cors = require('cors');
 
 // Update CORS configuration
 const corsOptions = {
