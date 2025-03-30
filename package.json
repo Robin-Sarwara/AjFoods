@@ -5,16 +5,20 @@
   "scripts": {
     "install-all": "npm install --prefix backend && npm install --prefix ajfood",
     "start-backend": "npm start --prefix backend",
-    "start-frontend": "vite --port 5173 --host 0.0.0.0",
+    "start-frontend": "cd ajfood && vite --port 5173 --host 0.0.0.0",
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "build-frontend": "npm run build --prefix ajfood",
-    "build": "npm run install-all && npm run build-frontend"
+    "build": "npm run install-all && npm run build-frontend",
+    "dev": "concurrently \"npm run dev-backend --prefix backend\" \"npm run start-frontend\""
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
     "cross-env": "^7.0.3"
   },
   "dependencies": {
+    "express-validator": "^7.2.1",
+    "razorpay": "^2.9.6",
+    "uuid": "^11.1.0",
     "vite": "^6.2.2"
   }
 }

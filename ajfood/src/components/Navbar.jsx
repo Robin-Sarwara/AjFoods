@@ -58,7 +58,7 @@ const{cartItemCount} = useCart(userId);
           to="/"
           className="flex items-center text-2xl font-bold text-red-500"
         >
-          <MdOutlineFastfood className="mr-2 text-3xl" /> Foodies
+          <MdOutlineFastfood className="mr-2 text-3xl" /> AJFood
         </Link>
 
         <ul className="hidden md:flex space-x-6 text-lg font-medium">
@@ -111,7 +111,7 @@ const{cartItemCount} = useCart(userId);
                     Profile
                   </Link>
                   <Link
-                    to="/orders"
+                    to="/order"
                     className="block px-4 py-2 hover:bg-gray-100"
                   >
                     Orders
@@ -180,7 +180,7 @@ const{cartItemCount} = useCart(userId);
             </Link>
           </li>
           <li>
-            <Link to="/orders" className="block py-2 hover:text-red-500">
+            <Link to="/order" className="block py-2 hover:text-red-500">
               Orders
             </Link>
           </li>

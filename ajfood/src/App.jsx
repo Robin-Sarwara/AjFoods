@@ -20,6 +20,8 @@ import ProductQuestion from './components/ProductQuestion'
 import UserAllAskedQues from './components/UserAllAskedQues'
 import AllReviews from './components/AllReviews'
 import Cart from './components/Cart'
+import Orders from './components/Orders'
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -50,6 +52,8 @@ function App() {
         <Route path="/user-all-questions" element={<UserAllAskedQues/>}/>
         <Route path="/all-reviews/:id" element={<AllReviews/>}/>
         <Route path="/cart" element={<Cart/>}/>
+        <Route path="/order" element={<Orders/>}/>
+
 
       </Routes>
       </RoleProvider>

@@ -5,7 +5,7 @@ const orderValidation = [
     body("items").isArray({ min: 1 }).withMessage("At least one item is required"),
     body("totalAmount").isNumeric().withMessage("Total Amount must be a number"),
     body("paymentMethod")
-        .isIn(["COD", "Card", "UPI", "Wallet"])
+        .isIn(["COD", "Prepaid"])
         .withMessage("Invalid payment method"),
     
     body("shippingAddress.street").notEmpty().withMessage("Street is required"),

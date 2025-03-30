@@ -6,7 +6,7 @@ const orderSchema = new mongoose.Schema({
 
     items:[
         {
-            foodId:{type:mongoose.Schema.Types.ObjectId, ref:"Products", required:true},
+            foodId:{type:mongoose.Schema.Types.ObjectId, ref:"Product", required:true},
             name:{type:String, required:true},
             quantity:{type:String, required:true},
             price: {type: Number, required:true}
@@ -14,8 +14,9 @@ const orderSchema = new mongoose.Schema({
     ],
 
     totalAmount:{type:Number, required:true},
-    paymentMethod:{type:String, enum:["COD", "Card", "UPI", "Wallet"], required:true},
+    paymentMethod:{type:String, enum:["COD", "Prepaid"], required:true},
     paymentStatus:{type:String, enum:["Pending", "Paid", "Failed"], default:"Pending"},
+    paymentId : { type: String, default: null },
 
     orderStatus:{
         type:String,
@@ -38,6 +39,7 @@ const orderSchema = new mongoose.Schema({
     },
     orderDate: { type: Date, default: Date.now },
     deliveredAt: { type: Date, default: null },
+    razorpayOrderId : { type: String, default: null },
   },
   { timestamps: true }
 );

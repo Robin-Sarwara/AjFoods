@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://ajfoods.onrender.com/api";
-
+const API_BASE_URL = process.env.NODE_ENV === "production"
+? "https://ajfoods.onrender.com/api"
+: "http://localhost:9090/api"
 const axiosInstance = axios.create({
     baseURL:API_BASE_URL,
     withCredentials:true,
