@@ -16,7 +16,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   
   const navigate = useNavigate();
-  const { role, userId, setUserId } = useRole();
+  const { role, userEmail } = useRole();
 
   const toggle = (i) => {
     setOpenIndex(openIndex === i ? null : i);

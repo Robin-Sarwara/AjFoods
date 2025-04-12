@@ -126,7 +126,7 @@ const userInfo = async (req, res) => {
       return res.status(500).json({ success: false, message: "Internal server error", error: err });
     }
     
-    const user = await UserModel.findById(decoded.id).select("role name");
+    const user = await UserModel.findById(decoded.id);
 
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });

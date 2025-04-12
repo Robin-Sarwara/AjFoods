@@ -21,6 +21,13 @@ import UserAllAskedQues from './components/UserAllAskedQues'
 import AllReviews from './components/AllReviews'
 import Cart from './components/Cart'
 import Orders from './components/Orders'
+import OrderManager from './components/OrderManager'
+import Profile from './components/Profile'
+import TermsAndCondition from './components/TermsAndCondition'
+import EditProfile from './components/EditProfile'
+import UpdateEmail from './components/UpdateEmail'
+import AddDeliveryAddress from './components/AddDeliveryAddress'
+import SearchedFood from './components/SearchedFood'
 
 
 function App() {
@@ -47,13 +54,19 @@ function App() {
         <Route path ="/faqs" element ={<MainLayout><FAQ/></MainLayout>}/>
         <Route path="/add-product" element={<AddProduct/>}/>
         <Route path="/home" element={<Carousel/>}/>
-        <Route path="/product/:id" element={<ProductInfo/>}/>
+        <Route path="/product/:id" element={<MainLayout> <ProductInfo/> </MainLayout> }/>
         <Route path="/all-questions/:id" element={<ProductQuestion/>}/>
         <Route path="/user-all-questions" element={<UserAllAskedQues/>}/>
         <Route path="/all-reviews/:id" element={<AllReviews/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/order" element={<Orders/>}/>
-
+        <Route path="/order-manager" element={<OrderManager/>}/>
+        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/terms-and-condtions" element={<TermsAndCondition/>}/>
+        <Route path="/edit-profile" element={<EditProfile/>}/>
+        <Route path="/update-email" element={<UpdateEmail/>}/>
+        <Route path="/delivery-address/add" element={<AddDeliveryAddress/>}/>
+        <Route path="/search" element={<MainLayout> <SearchedFood/> </MainLayout>}/>
 
       </Routes>
       </RoleProvider>

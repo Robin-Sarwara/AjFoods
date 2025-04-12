@@ -82,16 +82,13 @@ const Cart = () => {
   };
 
   const handlePaymentSuccess = async(response) => {
-    console.log("Payment Success:", response);
     setShowPaymentModal(false);
     setShowBuyAllModal(false);
     setSelectedItem(null);
     setRefresh((prev) => !prev); // Refresh cart after payment
-    showSuccessToast("Order placed successfully!");
     try {
       let itemId = selectedItem._id
       await axiosInstance.delete(`/delete/cart/${cartId}/items/${itemId}`);
-      showSuccessToast("Item removed successfully");
       setRefresh((prev) => !prev);
     } catch (error) {
       showErrorToast(
@@ -220,6 +217,7 @@ const Cart = () => {
           productName={selectedItem.productId.name}
           productPrice={selectedItem.quantity * selectedItem.productId.price}
           quantity={selectedItem.quantity}
+          foodId = {selectedItem.productId._id}
           onPaymentSuccess={handlePaymentSuccess}
           onClose={handleCloseModal}
         />

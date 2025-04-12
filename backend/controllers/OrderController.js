@@ -46,6 +46,19 @@ const createOrder = async (req, res) => {
   }
 };
 
+const deleteOrder = async(req, res)=>{
+  try {
+    const {id} = req.params;
+    const order = await Order.findByIdAndDelete(id)
+    if(!order){
+      return res.status(404).json({message:"Order not found"})
+    }
+    res.status(200).json({message:"Order deleted successfully"})
+  } catch (error) {
+    res.status(500).json({message:"Internal server error", error:error.message})
+  }
+}
+
 const updateShippingAddress = async (req, res) => {
   try {
     const { orderId } = req.params; // fixed typo: req.params
@@ -68,6 +81,23 @@ const updateShippingAddress = async (req, res) => {
       .json({ message: "Internal server error", error: error.message });
   }
 };
+
+const updateOrderStatus = async(req, res)=>{
+  try {
+    const {orderId} = req.params;
+    const {orderStatus} = req.body;
+  
+    const order = await Order.findById(orderId);
+    if(!order){
+      return res.status(404).json({message:"Order not found"})
+    }
+    order.orderStatus = orderStatus;
+    await order.save();
+    res.status(200).json({message:"Order status updated successfully", orderStatus})
+  } catch (error) {
+    res.status(500).json({message:"Internal server error", error:error.message})
+  }
+  }
 
 const cancelOrder = async (req, res) => {
   try {
@@ -158,19 +188,51 @@ const verifypayment = async (req, res) => {
   }
 };
 
-const getAllOrders = async (req, res) => {
+const getAllUserOrders = async (req, res) => {
   try {
     const { userId } = req.params;
-    const orders = await Order.find({ userId: userId })
+
+    const activeOrders = ["Pending", "Confirmed", "Preparing", "Out for Delivery", "Delivered",]
+
+
+    const order = await Order.find({ userId: userId, orderStatus: { $in: activeOrders } })
       .sort({ orderDate: -1 })
       .populate("items.foodId", "thumbnail");
-    res.status(200).json({ orders });
+
+    res.status(200).json({ order });
   } catch (error) {
     res
       .status(500)
       .json({ message: "Internal server error", error: error.message });
   }
 };
+
+const getAllActiveOrders =async(req, res)=>{
+  try {
+    const activeOrders = await Order.find({orderStatus:{$nin:["Delivered", "Cancelled"]}}).sort({createdAt: -1}).populate("items.foodId", "thumbnail");
+    res.status(200).json(activeOrders)
+  } catch (error) {
+    res.status(500).json({message:"Internal server error", error:error.message})
+  }
+}
+
+const getAllDeliveredOrder =async(req, res)=>{
+  try {
+    const deliveredOrders = await Order.find({orderStatus:"Delivered"}).sort({createdAt: -1}).populate("items.foodId", "thumbnail");
+    res.status(200).json(deliveredOrders)
+  } catch (error) {
+    res.status(500).json({message:"Internal server error", error:error.message})
+  }
+}
+
+const getAllCancelledOrders =async(req, res)=>{
+  try {
+    const cancelledOrders = await Order.find({orderStatus:"Cancelled"}).sort({createdAt: -1}).populate("items.foodId", "thumbnail");
+    res.status(200).json(cancelledOrders)
+  } catch (error) {
+    res.status(500).json({message:"Internal server error", error:error.message})
+  }
+}
 
 const getOrder = async (req, res) => {
   try {
@@ -190,9 +252,14 @@ const getOrder = async (req, res) => {
 module.exports = {
   createOrder,
   updateTrackingInfo,
-  getAllOrders,
+  getAllUserOrders,
   getOrder,
   verifypayment,
   updateShippingAddress,
-  cancelOrder
+  cancelOrder,
+  deleteOrder,
+  getAllActiveOrders,
+  getAllDeliveredOrder,
+  getAllCancelledOrders,
+  updateOrderStatus
 };

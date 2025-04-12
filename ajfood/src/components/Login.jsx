@@ -13,7 +13,7 @@ const Login = () => {
     password: "",
   });
   const [forgetPass, setForgetPass] = useState(false);
-  const { setRole, setUserId, setUsername } = useRole();
+  const { setRole, setUserId, setUsername, setUserEmail } = useRole();
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
       });
 
-      const { message, success, id, accessToken, name, role } = response.data;
+      const { message, success, id, accessToken, name, role, email } = response.data;
 
       if (success) {
         showSuccessToast(message);
@@ -46,6 +46,7 @@ const Login = () => {
         setRole(role);
         setUsername(name);
         setUserId(id);
+        setUserEmail(email)
         setLoading(false)
 
         setTimeout(() => {

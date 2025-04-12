@@ -25,7 +25,14 @@ const UserSchema = new schema({
     },
     otpExpiry:{
         type:Date
-    }
+    },
+    deliveryAddress: {
+        street: { type: String },
+        city: { type: String },
+        state: { type: String },
+        pincode: { type: String },
+        phoneNumber: { type: String }
+      }
 })
 const UserModel = mongoose.model('users',UserSchema )
 module.exports = UserModel

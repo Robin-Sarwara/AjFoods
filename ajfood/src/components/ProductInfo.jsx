@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "./Spinner";
@@ -13,6 +12,7 @@ import Reviews from "./Reviews";
 import { useRole } from "../utils/useRole";
 import axiosInstance from "../utils/axiosInstance";
 import RazorpayPayment from "./RazorpayPayment";
+import RelatedProducts from "./RelatedProducts";
 
 const ProductInfo = () => {
   const initialQuantity = 1;
@@ -107,7 +107,7 @@ const ProductInfo = () => {
   return (
     <>
       {loading && <Spinner />}
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4">
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 py-12 px-4">
         {product ? (
           <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
             <div className="grid md:grid-cols-2 gap-8 p-6">
@@ -224,7 +224,32 @@ const ProductInfo = () => {
           </div>
         )}
 
+        {/* Related Products, Feedback, and Reviews Section */}
         <div className="max-w-6xl mx-auto mt-12 space-y-12">
+          {/* Related Products with Distinct Background */}
+          <div
+            className="relative bg-gradient-to-r from-purple-100 via-indigo-50 to-purple-100 
+              py-12 px-6 rounded-2xl shadow-lg overflow-hidden"
+          >
+            {/* Decorative Background Elements */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+              <div className="w-80 h-80 bg-purple-300 rounded-full blur-3xl -top-10 -left-10"></div>
+              <div className="w-80 h-80 bg-indigo-300 rounded-full blur-3xl -bottom-10 -right-10"></div>
+            </div>
+            {/* Subtle Pattern Overlay */}
+            <div
+              className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2240%22%20height=%2240%22%20viewBox=%220%200%2040%2040%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d=%22M0%200h20v20H0zM20%2020h20v20H20z%22%20fill=%22%23ffffff%22%20fill-opacity=%220.1%22/%3E%3C/svg%3E')] 
+                opacity-30"
+            ></div>
+
+            <RelatedProducts
+              id={id}
+              product={product}
+              loading={loading}
+              setLoading={setLoading}
+            />
+          </div>
+
           <Feedback id={id} />
           <Reviews loading={loading} setLoading={setLoading} />
         </div>

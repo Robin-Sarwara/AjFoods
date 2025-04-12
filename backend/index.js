@@ -17,6 +17,10 @@ const userAskedQuestion = require('./routes/userAskedQuestions')
 const review = require('./routes/Review')
 const cart = require('./routes/cartRouter')
 const orders = require('./routes/Order')
+const editUser = require('./routes/EditProfile')
+const deliveryAddress = require('./routes/DeliveryAddress')
+const searchBar = require('./routes/SearchBar')
+const relatedProducts = require('./routes/RelatedProducts')
 
 // Update CORS configuration
 const corsOptions = {
@@ -46,6 +50,10 @@ app.use('/api',userAskedQuestion)
 app.use('/api',review)
 app.use("/api",cart)
 app.use("/api",orders)
+app.use("/api",editUser)
+app.use("/api",deliveryAddress)
+app.use("/api",searchBar)
+app.use("/api",relatedProducts)
 
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`)

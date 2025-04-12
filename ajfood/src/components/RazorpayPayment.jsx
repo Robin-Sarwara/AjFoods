@@ -4,6 +4,7 @@ import { useRole } from "../utils/useRole";
 import useCart from "../utils/useCart";
 import axiosInstance from "../utils/axiosInstance";
 import { useParams } from "react-router-dom";
+import { use } from "react";
 
 const RazorpayPayment = ({
   productName,
@@ -12,6 +13,7 @@ const RazorpayPayment = ({
   isCartSummary = false, // Optional: for "Buy All" case
   onPaymentSuccess,
   onClose,
+  foodId
 }) => {
   const razorpayKeyId = "rzp_test_YuYipOA69oYNNl";
   const razorpayKeySecret = "3xSKqG01boDkrEZVyOHBiQ9k";
@@ -38,7 +40,7 @@ const RazorpayPayment = ({
       quantity: i.quantity || 1,
     }))
   : [{
-      foodId: id,
+      foodId: id ?? foodId,
       name: productName,
       price: productPrice,
       quantity: quantity || 1,
@@ -52,11 +54,11 @@ const RazorpayPayment = ({
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
-
     return () => {
       document.body.removeChild(script);
     };
   }, []);
+
 
   const handlePayment = async() => {
     setLoading(true)
@@ -124,12 +126,35 @@ const RazorpayPayment = ({
     
   };
 
+  const getSavedDeliveryAddress = async()=>{
+    setLoading(true)
+    try {
+      const response = await axiosInstance.get(`${userId}/delivery-address`);
+      setShippingAddress({
+      street: response.data.deliveryAddress.street,
+      city: response.data.deliveryAddress.city,
+      state: response.data.deliveryAddress.state,
+      pincode: response.data.deliveryAddress.pincode
+      })
+    } catch (error) {
+      showSuccessToast(error?.response?.data?.error || "Error fetching Shipping Address")
+    }
+    finally{
+      setLoading(false)
+    }
+  }
+
   const handleAddressChange = (e) => {
     setShippingAddress({
       ...shippingAddress,
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+   getSavedDeliveryAddress();
+  }, [])
+  
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
@@ -138,7 +163,7 @@ const RazorpayPayment = ({
 
         {/* Order Summary */}
         <div className="mb-6 border-b pb-4">
-          <p className="text-gray-600">
+          <p className="text-gray-600"> 
             {isCartSummary ? "Cart Items" : `Product: ${productName}`}
           </p>
           {!isCartSummary && quantity && (

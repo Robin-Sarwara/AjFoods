@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { showErrorToast } from "../utils/toastMessage";
 import Spinner from "./Spinner";
 import { useRole } from "../utils/useRole";
-import AnswerApi from "../utils/AnswerApi";
 
 const MostAskedQuestion = ({ refreshQuestions }) => {
   const [questionData, setQuestionData] = useState([]);
