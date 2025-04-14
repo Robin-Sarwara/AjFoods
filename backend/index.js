@@ -24,9 +24,9 @@ const relatedProducts = require('./routes/RelatedProducts')
 
 // Update CORS configuration
 const corsOptions = {
-  origin: ['http://localhost:5173', 'https://ajfoods-1.onrender.com'], // Allow both local and deployed frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-  credentials: true // Include credentials if needed
+  origin: ['http://localhost:5173', 'https://ajfoods.netlify.app'], // Allow local dev & deployed frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Include OPTIONS for preflight requests
+  credentials: true // Allow credentials (cookies, authorization headers, TLS client certificates)
 };
 
 
