@@ -157,8 +157,8 @@ const RazorpayPayment = ({
   
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-lg">
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
+      <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-lg max-h-screen overflow-y-auto">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Complete Your Purchase</h2>
 
         {/* Order Summary */}
