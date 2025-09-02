@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { showErrorToast, showSuccessToast } from '../utils/toastMessage';
 import axiosInstance from '../utils/axiosInstance';
 import { useRole } from '../utils/useRole';
@@ -25,7 +24,7 @@ const Feedback = ({ id }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axiosInstance.post(`/products/${id}/feedback`, {
+      await axiosInstance.post(`/products/${id}/feedback`, {
         question: feedbackData.question,
         userId: userId
       });

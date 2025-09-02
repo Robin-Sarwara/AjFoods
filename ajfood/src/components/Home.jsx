@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import { Flag, MoreVertical } from "lucide-react";
+import { MoreVertical } from "lucide-react";
 import { showErrorToast, showSuccessToast } from "../utils/toastMessage";
 import Swal from "sweetalert2";
 import Spinner from "./Spinner";
@@ -16,7 +16,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   
   const navigate = useNavigate();
-  const { role, userEmail } = useRole();
+  const { role } = useRole();
 
   const toggle = (i) => {
     setOpenIndex(openIndex === i ? null : i);
@@ -29,9 +29,9 @@ const Home = () => {
     setLoading(false);
   };
 
-  const checkAdmin = () => {
+  const checkAdmin = useCallback(() => {
     setIsAdmin(role === "admin");
-  };
+  }, [role]);
 
   useEffect(() => {
     fetchProducts();
@@ -39,7 +39,7 @@ const Home = () => {
 
   useEffect(() => {
     checkAdmin();
-  }, [role]);
+  }, [role, checkAdmin]);
 
   const handleDelete = async (id) => {
     setOpenIndex(null);

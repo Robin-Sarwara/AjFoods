@@ -10,13 +10,17 @@ import { MoreVertical } from "lucide-react";
 import Swal from "sweetalert2";
 
 const AllReviews = () => {
-  const { userId, role } = useRole(); // username not used currently
+  const { userId, username, role } = useRole();
 
+  const [review, setReview] = useState("");
   const [loading, setLoading] = useState('')
+  const [rating, setRating] = useState(0);
   const [reviewData, setReviewData] = useState({ review: [] });
   const [refresher, setRefresher] = useState(false);
   const [upvotedReviews, setUpvotedReviews] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
+  const [checkUpdate, setCheckUpdate] = useState(false);
+  const [reviewId, setReviewId] = useState("");
 
   const { id } = useParams();
 
@@ -33,8 +37,6 @@ const AllReviews = () => {
     setCheckUpdate(true);
   };
 
-  // handleSubmit function is currently unused - commenting out to fix linting
-  /*
   const handleSubmit = async () => {
     setLoading(true);
     if (checkUpdate) {
@@ -92,7 +94,6 @@ const AllReviews = () => {
       }
     }
   };
-  */
 
   const handleDelete = async (id) => {
     setOpenIndex(null);
