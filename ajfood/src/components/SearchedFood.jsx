@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 import { showErrorToast } from "../utils/toastMessage";
@@ -12,7 +12,7 @@ const SearchedFood = () => {
   const navigate = useNavigate();
   const query = new URLSearchParams(search).get("query");
 
-  const getSearchedFood = async () => {
+  const getSearchedFood = useCallback(async () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get(`/search?query=${query}`);
@@ -24,13 +24,13 @@ const SearchedFood = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [query]);
 
   useEffect(() => {
     if (query) {
       getSearchedFood();
     }
-  }, [query]);
+  }, [query, getSearchedFood]);
 
   const handleProductClick = (id) => {
     navigate(`/product/${id}`);
@@ -42,7 +42,7 @@ const SearchedFood = () => {
       <div className="w-full min-h-screen bg-gradient-to-b from-gray-50 to-gray-200 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-8 tracking-tight">
-            Search Results for <span className="text-blue-600">"{query || ''}"</span>
+            Search Results for <span className="text-blue-600">&quot;{query || ''}&quot;</span>
           </h2>
           {searchedFood.length === 0 && !loading ? (
             <div className="text-center py-12">

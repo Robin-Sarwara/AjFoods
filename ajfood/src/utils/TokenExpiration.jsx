@@ -1,3 +1,6 @@
+// Utility function for getting token expiration (currently unused)
+// Commented out to fix linting errors
+/*
 const getTokenExpiration = (token) => {
     if (!token) return null;
     try {
@@ -7,3 +10,4 @@ const getTokenExpiration = (token) => {
         return null;
     }
 };
+*/

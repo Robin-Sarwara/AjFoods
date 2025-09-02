@@ -8,8 +8,6 @@ export const RoleProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const [loading, setLoading] = useState(true);
-  // Initialize as null if you're expecting an object
-  const [userData, setuserData] = useState(null);
 
   const fetchUserDetails = async () => {  
     try {
@@ -24,7 +22,6 @@ export const RoleProvider = ({ children }) => {
       setUserEmail(response.data.email);
       setUsername(response.data.name);
       setUserId(response.data.id);
-      setuserData(response.data);
     } catch (error) {
       console.error("Error fetching user details:", error);
     } finally {

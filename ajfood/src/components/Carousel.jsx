@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { showErrorToast } from '../utils/toastMessage';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -75,7 +74,7 @@ const Carousel = () => {
           bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
           Hot Deals on Food Items
         </h1>
-        <p className="text-gray-600 mt-2 text-lg">Grab these discounts before they're gone!</p>
+        <p className="text-gray-600 mt-2 text-lg">Grab these discounts before they&apos;re gone!</p>
       </div>
 
       <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden">
