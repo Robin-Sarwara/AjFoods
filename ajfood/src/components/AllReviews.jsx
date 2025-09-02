@@ -37,6 +37,8 @@ const AllReviews = () => {
     setCheckUpdate(true);
   };
 
+  // Function for handling review submission (UI not implemented yet)
+  // eslint-disable-next-line no-unused-vars
   const handleSubmit = async () => {
     setLoading(true);
     if (checkUpdate) {
