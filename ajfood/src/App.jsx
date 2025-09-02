@@ -33,10 +33,6 @@ import SearchedFood from './components/SearchedFood'
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  const PrivateRoute = ({element})=>{
-    return isAuthenticated ? element: <Navigate to="/home" />
-  }
-
   return (
     <div>
       <RefreshHandler setIsAuthenticated={setIsAuthenticated}/>

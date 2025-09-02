@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import { useRole } from '../utils/useRole';
 import { showErrorToast, showSuccessToast } from '../utils/toastMessage';
@@ -21,9 +21,9 @@ const AddDeliveryAddress = () => {
 
   useEffect(() => {
     fetchDeliveryAddress();
-  }, []);
+  }, [fetchDeliveryAddress]);
 
-  const fetchDeliveryAddress = async () => {
+  const fetchDeliveryAddress = useCallback(async () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get(`/${userId}/delivery-address`);
@@ -42,7 +42,7 @@ const AddDeliveryAddress = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,7 +81,7 @@ const AddDeliveryAddress = () => {
           ? `/${userId}/update/delivery-address`    
           : `/${userId}/add/delivery-address`;
         
-        const response = await axiosInstance[method](url, formData);
+        await axiosInstance[method](url, formData);
         showSuccessToast(hasSavedAddress 
           ? "Delivery Address Updated successfully" 
           : "Delivery Address Added successfully");

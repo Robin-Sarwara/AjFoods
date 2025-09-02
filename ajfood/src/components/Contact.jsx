@@ -1,11 +1,9 @@
-import React from 'react';
-
 const Contact = () => {
   return (
     <section className="bg-white ml-20 py-16 px-4">
       <div className="container mx-auto ">
         <h2 className="text-4xl font-semibold text-green-600 mb-4">Contact Us</h2>
-        <p className="text-lg text-gray-600 mb-12">We'd love to hear from you! For any help or queries, feel free to reach out.</p>
+        <p className="text-lg text-gray-600 mb-12">We&apos;d love to hear from you! For any help or queries, feel free to reach out.</p>
 
         <div className="flex flex-col gap-16">
           <div className="text-left">
@@ -25,7 +23,7 @@ const Contact = () => {
 
         <div className="mt-12">
           <p className="text-lg font-bold text-gray-600">
-            We're here to help, and we’ll respond as soon as possible. Thank you for reaching out!
+            We&apos;re here to help, and we’ll respond as soon as possible. Thank you for reaching out!
           </p>
         </div>
       </div>

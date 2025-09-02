@@ -1,5 +1,3 @@
-import React from 'react';
-
 const About = () => {
   return (
     <section className="bg-gray-50 py-16 px-4">
@@ -32,7 +30,7 @@ const About = () => {
 
         <div className="mt-12">
           <p className="text-lg text-gray-600">
-            Thank you for being a part of our journey. We're excited to continue bringing you the best of food, and we can't wait to share more delicious experiences with you!
+            Thank you for being a part of our journey. We&apos;re excited to continue bringing you the best of food, and we can&apos;t wait to share more delicious experiences with you!
           </p>
         </div>
       </div>

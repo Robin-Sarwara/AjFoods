@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { showErrorToast, showSuccessToast } from "../utils/toastMessage";
 import { useLocation, useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
