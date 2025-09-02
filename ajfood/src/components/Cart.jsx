@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useCart from "../utils/useCart";
 import { useRole } from "../utils/useRole";
 import { Minus, Plus } from "lucide-react";
@@ -81,7 +81,7 @@ const Cart = () => {
     setShowBuyAllModal(true); 
   };
 
-  const handlePaymentSuccess = async(response) => {
+  const handlePaymentSuccess = async() => {
     setShowPaymentModal(false);
     setShowBuyAllModal(false);
     setSelectedItem(null);
@@ -114,7 +114,7 @@ const Cart = () => {
     if (userId) {
       fetchCart();
     }
-  }, [refresh, userId]);
+  }, [refresh, userId, fetchCart]);
 
   return (
     <>

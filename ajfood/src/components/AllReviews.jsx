@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axiosInstance from "../utils/axiosInstance";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useRole } from "../utils/useRole";
 import StarRating from "./StarRating";
 import { showErrorToast, showSuccessToast } from "../utils/toastMessage";
@@ -10,21 +10,15 @@ import { MoreVertical } from "lucide-react";
 import Swal from "sweetalert2";
 
 const AllReviews = () => {
-  const { userId, username, role } = useRole();
+  const { userId, role } = useRole(); // username not used currently
 
-  const [review, setReview] = useState("");
   const [loading, setLoading] = useState('')
-  const [rating, setRating] = useState(0);
   const [reviewData, setReviewData] = useState({ review: [] });
   const [refresher, setRefresher] = useState(false);
   const [upvotedReviews, setUpvotedReviews] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
-  const [checkUpdate, setCheckUpdate] = useState(false);
-  const [reviewId, setReviewId] = useState("");
 
   const { id } = useParams();
-
-  const navigate = useNavigate();
 
   const toggle = (i) => {
     setOpenIndex(openIndex === i ? null : i);
@@ -39,6 +33,8 @@ const AllReviews = () => {
     setCheckUpdate(true);
   };
 
+  // handleSubmit function is currently unused - commenting out to fix linting
+  /*
   const handleSubmit = async () => {
     setLoading(true);
     if (checkUpdate) {
@@ -96,6 +92,7 @@ const AllReviews = () => {
       }
     }
   };
+  */
 
   const handleDelete = async (id) => {
     setOpenIndex(null);
@@ -131,7 +128,7 @@ const AllReviews = () => {
     }
   };
 
-  const fetchReview = async () => {
+  const fetchReview = useCallback(async () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get(
@@ -151,7 +148,7 @@ const AllReviews = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, userId]);
 
   const handleUpvote = async (reviewId) => {
     setLoading(true);
@@ -191,10 +188,10 @@ const AllReviews = () => {
 
   useEffect(() => {
     fetchReview();
-  }, []);
+  }, [fetchReview]);
   useEffect(() => {
     fetchReview();
-  }, [refresher]);
+  }, [refresher, fetchReview]);
 
   return (
     <>

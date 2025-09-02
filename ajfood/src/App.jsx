@@ -31,7 +31,9 @@ import SearchedFood from './components/SearchedFood'
 
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  // Note: isAuthenticated is currently only used by RefreshHandler but not for route protection
 
   return (
     <div>
