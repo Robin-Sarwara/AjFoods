@@ -21,6 +21,7 @@ const editUser = require('./routes/EditProfile')
 const deliveryAddress = require('./routes/DeliveryAddress')
 const searchBar = require('./routes/SearchBar')
 const relatedProducts = require('./routes/RelatedProducts')
+const aiAssistant = require('./routes/aiAssistant')
 
 // Update CORS configuration
 const corsOptions = {
@@ -54,6 +55,7 @@ app.use("/api",editUser)
 app.use("/api",deliveryAddress)
 app.use("/api",searchBar)
 app.use("/api",relatedProducts)
+app.use("/api/ai",aiAssistant)
 
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`)

@@ -15,7 +15,7 @@ const generateToken = (user)=>{
     {expiresIn:"7d"}
   )
   return {accessToken, refreshToken}
-}
+} 
 
 const signup = async (req, res) => {
   try {
@@ -63,11 +63,6 @@ const login = async (req, res) => {
       sameSite: "Strict",
       maxAge: 7 * 24 * 60 * 60 * 1000 
     })
-    // const JwtToken = jwt.sign(
-    //   { email: user.email, _id: user._id ,role:user.role},
-    //   process.env.JWT_SECRET, 
-    //   { expiresIn: "7d" }
-    // );
     res
       .status(200)
       .json({

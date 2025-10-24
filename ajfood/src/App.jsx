@@ -28,6 +28,7 @@ import EditProfile from './components/EditProfile'
 import UpdateEmail from './components/UpdateEmail'
 import AddDeliveryAddress from './components/AddDeliveryAddress'
 import SearchedFood from './components/SearchedFood'
+import AIChat from './components/AIChat'
 
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
       <RefreshHandler setIsAuthenticated={setIsAuthenticated}/>
       <ToastContainer/>
       <RoleProvider>
+      {/* AI Chat Assistant - Available on all pages */}
+      <AIChat />
+      
       <Routes>
         <Route path = "/" element={<Navigate to= "/home"/>} /> 
         <Route path="/login" element={<Login/>}/>
